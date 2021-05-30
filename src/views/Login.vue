@@ -31,26 +31,15 @@
                       style="transition: all 0.15s ease 0s;"
                   />
                   </div>
-                  <div>
-                    <label class="inline-flex items-center cursor-pointer"
-                    ><input
-                        id="customCheckLogin"
-                        type="checkbox"
-                        class="form-checkbox border-0 rounded text-gray-800 ml-1 w-5 h-5"
-                        style="transition: all 0.15s ease 0s;"
-                    /><span class="ml-2 text-sm font-semibold text-gray-700"
-                    >Remember me</span
-                    ></label
-                    >
-                  </div>
-                  <div class="text-center mt-6">
-                    <button
-                        class="bg-indigo-500 text-indigo-50 py-2 px-6 rounded-lg"
-                        type="button"
-                        style="transition: all 0.15s ease 0s;"
-                    >
-                      Sign In
-                    </button>
+                  <div class="flex">
+                    <div class="text-center mt-6">
+                      <button class="bg-indigo-500 text-white active:bg-indigo-600 font-bold uppercase text-sm px-5 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                              type="button"
+                              @click="btnClick"
+                      >
+                        Log in
+                      </button>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -58,8 +47,7 @@
             <div class="flex flex-wrap mt-6">
               <div class="w-1/2">
                 <a href="#pablo" class="text-gray-300"
-                ><small>Forgot password?</small></a
-                >
+                ><small>Forgot password?</small></a>
               </div>
               <div class="w-1/2 text-right">
                 <a href="#pablo" class="text-gray-300"
@@ -76,7 +64,12 @@
 
 <script>
 export default {
-  name: "Login"
+  name: "Login",
+  methods: {
+    btnClick() {
+      this.$router.push('/dashboard')
+    }
+  }
 }
 </script>
 
