@@ -1,5 +1,5 @@
-import {Authenticate} from "@/Domain/Authenticate";
-import {ILoginInterface} from "@/Domain/Authenticate";
+import {Authenticate} from "@/API/Authenticate";
+import {ILoginInterface} from "@/API/Authenticate";
 
 interface APIResponseInterface {
     data: {
