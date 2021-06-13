@@ -1,17 +1,22 @@
 <template>
-  <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div>
+    <h1>Dashboard</h1>
+    {{userInfo}}
+
   </div>
 </template>
+<script>
+import {Component, Vue} from 'vue-property-decorator';
+import UserStore from "../store/UserStore";
+@Component
+export default class Dashboard extends Vue {
+  get userInfo() {
+    return UserStore.userInfo;
+  }
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-
-@Component({
-  components: {
-    HelloWorld,
-  },
-})
-export default class Home extends Vue {}
+  logout() {
+    UserStore.logout();
+    this.$router.push('/login');
+  }
+}
 </script>

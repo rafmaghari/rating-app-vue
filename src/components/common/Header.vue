@@ -6,11 +6,11 @@
           RATING APP
         </a>
         <button class="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none" type="button" v-on:click="toggleNavbar()">
-          <i class="fas fa-bars"></i>
+          <i><font-awesome-icon icon="bars" /></i>
         </button>
       </div>
       <div v-bind:class="{'hidden': !showMenu, 'flex': showMenu}" class="lg:flex lg:flex-grow items-center">
-        <ul class="flex flex-col lg:flex-row list-none ml-auto">
+        <ul class="flex flex-col lg:flex-row list-none ml-auto" v-if="!isLoggedIn">
           <li class="nav-item">
             <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="/login">
               <i class="fab fa-twitter text-lg leading-lg text-white opacity-75" /><span class="ml-2">LOGIN</span>
@@ -22,23 +22,56 @@
             </a>
           </li>
         </ul>
+        <ul class="flex flex-col lg:flex-row list-none ml-auto" v-else>
+          <li class="nav-item">
+            <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="/home">
+              <i class="fab fa-twitter text-lg leading-lg text-white opacity-75" />
+              <span class="ml-2"><font-awesome-icon icon="home"  class="mr-2"/>Home
+              </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="/profile">
+              <i class="fab fa-twitter text-lg leading-lg text-white opacity-75" />
+              <span class="ml-2"><font-awesome-icon icon="user"  class="mr-2"/>{{ userInfo.first_name}}
+              </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" @click="logout">
+              <i class="fab fa-twitter text-lg leading-lg text-white opacity-75" /><span class="ml-2">
+              <font-awesome-icon icon="sign-out-alt" class="mr-2"/>LOGOUT </span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
-export default {
-  name: "indigo-navbar",
-  data() {
-    return {
-      showMenu: false
-    }
-  },
-  methods: {
-    toggleNavbar: function(){
-      this.showMenu = !this.showMenu;
-    }
+import {Vue, Component} from 'vue-property-decorator';
+import UserStore from "@/store/UserStore";
+
+@Component
+export default class Header extends Vue {
+  showMenu = false;
+
+  get userInfo() {
+    return UserStore.userInfo;
+  }
+
+  get isLoggedIn() {
+    return UserStore.isLoggedIn;
+  }
+
+  toggleNavbar(){
+    this.showMenu = !this.showMenu;
+  }
+
+  logout() {
+    UserStore.logout();
+    this.$router.push('/login');
   }
 }
 </script>

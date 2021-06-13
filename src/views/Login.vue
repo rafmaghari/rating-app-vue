@@ -80,9 +80,9 @@ export default class Login extends Vue {
     if (authenticateResponse) {
       const {data} = authenticateResponse;
       UserStore.setUserInfo(data.user || {})
-        localStorage.setItem('user-info', JSON.stringify(data.user))
-        localStorage.setItem('token', data.token || "")
-        this.$router.push('/dashboard');
+      localStorage.setItem('user-info', JSON.stringify(data.user))
+      localStorage.setItem('token', data.token || "")
+      this.$router.push('/home');
     }
   }
 }

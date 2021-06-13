@@ -1,5 +1,4 @@
 import {http} from "@/common/http";
-import {User} from "@/models/User";
 import {AxiosResponse} from "axios";
 
 export interface ILoginInterface {

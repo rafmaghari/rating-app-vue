@@ -22,9 +22,15 @@ const routes: Array<RouteConfig> = [
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
   },
   {
-    path: '/dashboard',
-    name: 'DashBoard',
-    component: () => import(/* webpackChunkName: "login" */ '../views/Dashboard.vue'),
+    path: '/home',
+    name: 'Home',
+    component: () => import(/* webpackChunkName: "login" */ '../views/Home.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import(/* webpackChunkName: "login" */ '../views/Profile.vue'),
     meta: { requiresAuth: true }
   }
 ]
