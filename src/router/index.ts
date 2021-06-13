@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
+import UserStore from "@/store/UserStore";
 
 Vue.use(VueRouter)
 
@@ -23,7 +24,8 @@ const routes: Array<RouteConfig> = [
   {
     path: '/dashboard',
     name: 'DashBoard',
-    component: () => import(/* webpackChunkName: "login" */ '../views/Dashboard.vue')
+    component: () => import(/* webpackChunkName: "login" */ '../views/Dashboard.vue'),
+    meta: { requiresAuth: true }
   }
 ]
 
@@ -32,5 +34,18 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!UserStore.isLoggedIn) {
+      next({ path: '/login' });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+})
+
 
 export default router

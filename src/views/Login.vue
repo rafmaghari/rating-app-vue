@@ -64,10 +64,11 @@
   </main>
 </template>
 
-<script>
-import { Vue, Component } from 'vue-property-decorator';
-import {LoginService} from "../services/LoginService";
+<script lang="ts">
+import {Component, Vue} from 'vue-property-decorator';
+import {LoginService} from "@/services/LoginService";
 import UserStore from "../store/UserStore";
+
 @Component
 export default class Login extends Vue {
   email = 'admin@gmail.com';
@@ -76,11 +77,12 @@ export default class Login extends Vue {
   async login() {
     const loginService = new LoginService(this.email, this.password)
     const authenticateResponse = await loginService.validate();
-    if (authenticateResponse.success) {
-      localStorage.setItem('user-info', JSON.stringify(authenticateResponse.data.user))
-      UserStore.setUserInfo(authenticateResponse.data.user)
-      localStorage.setItem('token', authenticateResponse.data.token)
-      this.$router.push('/dashboard');
+    if (authenticateResponse) {
+      const {data} = authenticateResponse;
+      UserStore.setUserInfo(data.user || {})
+        localStorage.setItem('user-info', JSON.stringify(data.user))
+        localStorage.setItem('token', data.token || "")
+        this.$router.push('/dashboard');
     }
   }
 }

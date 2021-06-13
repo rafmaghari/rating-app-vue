@@ -1,7 +1,13 @@
-import {Authenticate} from "@/Infrastructure/Authenticate";
-import {ILoginInterface} from "@/Infrastructure/Authenticate";
-import {User} from "@/models/User";
+import {Authenticate} from "@/Domain/Authenticate";
+import {ILoginInterface} from "@/Domain/Authenticate";
 
+interface APIResponseInterface {
+    data: {
+        user: null,
+        token: null
+    },
+    success: boolean,
+}
 
 export class LoginService implements ILoginInterface{
     email = "";
@@ -12,9 +18,9 @@ export class LoginService implements ILoginInterface{
         this.password = password;
     }
 
-    public async validate(): Promise<User> {
+    public async validate() {
         const auth = new Authenticate(this.email, this.password);
-        const resp = await auth.getLoginCredentials()
-        return resp.data;
+        const response = await auth.getLoginCredentials()
+        return response.data as APIResponseInterface;
     }
 }

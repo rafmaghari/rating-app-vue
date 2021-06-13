@@ -7,6 +7,14 @@ export interface ILoginInterface {
     password: string;
 }
 
+interface APIResponseInterface {
+    data: {
+        user: null,
+        token: null
+    },
+    success: boolean,
+}
+
 
 export class Authenticate implements ILoginInterface {
     static URI = "auth/login";
@@ -18,11 +26,11 @@ export class Authenticate implements ILoginInterface {
         this.password = password;
     }
 
-    getLoginCredentials(): Promise<AxiosResponse<User>> {
+    getLoginCredentials(): Promise<AxiosResponse> {
         const params = {
             "email": this.email,
             "password": this.password
         }
-        return http.post<User>(Authenticate.URI, params);
+        return http.post(Authenticate.URI, params);
     }
 }
