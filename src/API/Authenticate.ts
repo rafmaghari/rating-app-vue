@@ -6,15 +6,6 @@ export interface ILoginInterface {
     password: string;
 }
 
-interface APIResponseInterface {
-    data: {
-        user: null,
-        token: null
-    },
-    success: boolean,
-}
-
-
 export class Authenticate implements ILoginInterface {
     static URI = "auth/login";
     email = "";

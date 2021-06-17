@@ -12,6 +12,7 @@ const headers = {
     Accept: "application/json",
     "Content-Type": "application/json;",
     "Access-Control-Allow-Credentials": '*',
+    "Access-Control-Allow-Origin": '*',
 }
 
 const token = (config: AxiosRequestConfig): AxiosRequestConfig => {

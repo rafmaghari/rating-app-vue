@@ -1,7 +1,7 @@
 import {Authenticate} from "@/API/Authenticate";
 import {ILoginInterface} from "@/API/Authenticate";
 
-interface APIResponseInterface {
+interface APIUserResponseInterface {
     data: {
         user: null,
         token: null
@@ -21,6 +21,6 @@ export class LoginService implements ILoginInterface{
     public async validate() {
         const auth = new Authenticate(this.email, this.password);
         const response = await auth.getLoginCredentials()
-        return response.data as APIResponseInterface;
+        return response.data as APIUserResponseInterface;
     }
 }

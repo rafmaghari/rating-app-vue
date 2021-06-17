@@ -7,10 +7,18 @@ import './assets/tailwind.css'
 Vue.config.productionTip = false
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faBars, faUser, faSignOutAlt, faHome } from '@fortawesome/free-solid-svg-icons'
+import {
+  faBars,
+  faUser,
+  faSignOutAlt,
+  faHome,
+  faArrowUp,
+  faArrowDown,
+  faComment
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faBars, faUser, faSignOutAlt, faHome)
+library.add(faBars, faUser, faSignOutAlt, faHome, faArrowUp, faArrowDown, faComment)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
