@@ -1,4 +1,5 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
+import Vue from 'vue';
 
 enum StatusCode {
     Unauthorized = 401,
@@ -90,7 +91,11 @@ class Http {
 
         switch (status) {
             case StatusCode.InternalServerError: {
-                // Handle InternalServerError
+                Vue.notify({
+                    type: 'error',
+                    title: 'Internal Server Error.',
+                    text: 'Please contact our support.'
+                });
                 break;
             }
             case StatusCode.Forbidden: {
@@ -98,7 +103,12 @@ class Http {
                 break;
             }
             case StatusCode.Unauthorized: {
-                // Handle Unauthorized
+                Vue.notify({
+                    type: 'warn',
+                    title: 'Unauthorized.',
+                    text: 'Please login.'
+                });
+                window.location.href = '/login';
                 break;
             }
             case StatusCode.BadRequest: {

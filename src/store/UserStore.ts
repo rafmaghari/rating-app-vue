@@ -1,5 +1,5 @@
 import {VuexModule, Module, Action, Mutation, getModule} from "vuex-module-decorators";
-import {User} from '@/models/User';
+import {User} from '@/models/types/User';
 import store from '@/store';
 
 @Module({dynamic: true, store, name: 'UserStore', namespaced: true})

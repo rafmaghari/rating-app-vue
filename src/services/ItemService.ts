@@ -1,9 +1,5 @@
 import Item from "@/API/Item";
-
-interface ApiResponseInterface {
-    data: string[],
-    success: boolean,
-}
+import {ApiResponseInterface} from "@/models/Interfaces/ApiResponseInterface";
 
 export  default  class ItemService{
     public async getAll(): Promise<ApiResponseInterface> {

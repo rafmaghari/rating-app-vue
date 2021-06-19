@@ -12,30 +12,30 @@
       <div v-bind:class="{'hidden': !showMenu, 'flex': showMenu}" class="lg:flex lg:flex-grow items-center">
         <ul class="flex flex-col lg:flex-row list-none ml-auto" v-if="!isLoggedIn">
           <li class="nav-item">
-            <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="/login">
+            <router-link class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" to="/login">
               <i class="fab fa-twitter text-lg leading-lg text-white opacity-75" /><span class="ml-2">LOGIN</span>
-            </a>
+            </router-link>
           </li>
           <li class="nav-item">
-            <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="#pablo">
+            <router-link class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" to="/register">
               <i class="fab fa-pinterest text-lg leading-lg text-white opacity-75" /><span class="ml-2">REGISTER</span>
-            </a>
+            </router-link>
           </li>
         </ul>
         <ul class="flex flex-col lg:flex-row list-none ml-auto" v-else>
           <li class="nav-item">
-            <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="/home">
+            <router-link class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" to="/home">
               <i class="fab fa-twitter text-lg leading-lg text-white opacity-75" />
               <span class="ml-2"><font-awesome-icon icon="home"  class="mr-2"/>Home
               </span>
-            </a>
+            </router-link>
           </li>
           <li class="nav-item">
-            <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="/profile">
+            <router-link class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" to="/profile">
               <i class="fab fa-twitter text-lg leading-lg text-white opacity-75" />
               <span class="ml-2"><font-awesome-icon icon="user"  class="mr-2"/>{{ userInfo.first_name}}
               </span>
-            </a>
+            </router-link>
           </li>
           <li class="nav-item">
             <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" @click="logout">
