@@ -20,30 +20,7 @@
            {{ downVote(item.ratings) }}
          </span>
         </div>
-        <div v-if="item.comments.length > 0" class="my-1">
-          <div id="task-comments" v-for="(comment,index) in item.comments" :key="index">
-            <div class="bg-white rounded-lg p-2 flex flex-col justify-center items-center md:items-start">
-              <div class="flex justify-center mr-2">
-                <img alt="avatar"
-                     class="rounded-full w-5 h-5 mr-1 shadow-lg mb-1"
-                     height="10"
-                     src="https://cdn1.iconfinder.com/data/icons/technology-devices-2/100/Profile-512.png"
-                     width="10">
-                <h3 class="text-purple-600 font-semibold text-xs text-center md:text-left ">{{ comment.user.first_name}} {{comment.user.last_name}}</h3>
-              </div>
-              <p style="width: 90%" class="text-gray-600 text-xs text-center md:text-left ">{{comment.content }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center mt-1">
-          <input
-              :id="item.id"
-              class="appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"
-              placeholder="Add Comment here..." type="text"
-              @keyup.enter="comment(item)"
-              v-model="item.comment"
-          >
-        </div>
+        <ItemComment :item="item" />
       </div>
     </section>
   </div>
@@ -54,7 +31,10 @@ import ItemService from "@/services/ItemService";
 import RatingService from "@/services/RatingService";
 import UserStore from "@/store/UserStore";
 import ItemCommentService from "@/services/ItemCommentService";
-@Component
+import ItemComment from "@/components/Item/ItemComment";
+@Component({
+  components: {ItemComment}
+})
 export default class Dashboard extends Vue {
    items = [];
 
@@ -84,10 +64,7 @@ export default class Dashboard extends Vue {
 
    myVote = (type, item) => {
        const vote = this.userVote(item)
-       if (vote) {
-          return vote.rating === type ? 'text-indigo-500' : 'text-gray-300'
-       }
-       return 'text-gray-300';
+       return vote ? vote.rating === type ? 'text-indigo-500' : 'text-gray-300' : 'text-gray-300';
    }
 
    async btnVote(type, item) {
@@ -119,6 +96,7 @@ export default class Dashboard extends Vue {
      if (comment) {
        comment.data.user = this.user
        item.comments.push(comment.data)
+       item.comment = '';
      }
    }
 }
