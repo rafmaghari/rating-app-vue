@@ -7,6 +7,7 @@ enum StatusCode {
     TooManyRequests = 429,
     InternalServerError = 500,
     BadRequest = 400,
+    UNPROCESSABLE_ENTITY = 422
 }
 
 const headers = {
@@ -86,13 +87,13 @@ class Http {
     }
 
 
-    private handleError(error: any) {
-        const { status } = error;
+    private handleError(errors: any) {
+        const { status } = errors;
 
         switch (status) {
             case StatusCode.InternalServerError: {
                 Vue.notify({
-                    type: 'error',
+                    type: 'errors',
                     title: 'Internal Server Error.',
                     text: 'Please contact our support.'
                 });
@@ -112,16 +113,26 @@ class Http {
                 break;
             }
             case StatusCode.BadRequest: {
-                alert(error.data.data['error']);
+                alert(errors.data.data['error']);
                 break;
             }
             case StatusCode.TooManyRequests: {
                 // Handle TooManyRequests
                 break;
             }
+            case StatusCode.UNPROCESSABLE_ENTITY: {
+                Object.keys(errors.data.errors).forEach(key => {
+                    Vue.notify({
+                        type: 'error',
+                        title: 'Rating App.',
+                        text: errors.data.errors[key][0]
+                    });
+                })
+                break;
+            }
         }
 
-        return Promise.reject(error);
+        return Promise.reject(errors);
     }
 
 }

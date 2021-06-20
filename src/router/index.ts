@@ -37,6 +37,12 @@ const routes: Array<RouteConfig> = [
     name: 'Profile',
     component: () => import(/* webpackChunkName: "login" */ '../views/Profile.vue'),
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/item/:id',
+    name: 'Item',
+    component: () => import(/* webpackChunkName: "login" */ '../views/Item.vue'),
+    meta: { requiresAuth: true }
   }
 ]
 

@@ -2,7 +2,7 @@
   <div>
     <p v-if="item.comments.length > 0"
        class="text-xs underline text-indigo-500 cursor-pointer"
-       @click="toggleComment">{{!toggle ? 'Show Comment/s' : 'Hide Comment/s'}}
+       @click="toggleComment">{{!toggle ? 'Show Comment' : 'Hide Comment'}}
     </p>
     <div v-if="item.comments.length > 0" class="my-1" v-show="toggle">
       <div id="task-comments" v-for="(comment,index) in item.comments" :key="index">

@@ -1,4 +1,4 @@
-import {ApiResponseInterface} from "@/models/Interfaces/ApiResponseInterface";
+import {ApiResponseInterface} from "@/models/types/ApiResponseInterface";
 import ItemComment from "@/API/ItemComment";
 
 export  default  class ItemCommentService{

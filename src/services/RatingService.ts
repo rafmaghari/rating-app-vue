@@ -1,6 +1,5 @@
-import Item from "@/API/Item";
 import Rating from "@/API/Rating";
-import {ApiResponseInterface} from "@/models/Interfaces/ApiResponseInterface";
+import {ApiResponseInterface} from "@/models/types/ApiResponseInterface";
 
 export  default  class RatingService{
     public async vote(param: any): Promise<ApiResponseInterface> {
